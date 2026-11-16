@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The parts of the Steinberg VST3 SDK (MIT licensed, in external\vst3sdk) that a plug-in needs. -->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{FC1A6FFB-B0EE-40B3-9F1C-CC6256F7EC9D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>VST3SDK</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Build\Common.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Vst3SdkDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="external\vst3sdk\base\source\baseiids.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\fbuffer.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\fdebug.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\fdynlib.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\fobject.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\fstreamer.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\fstring.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\timer.cpp" />
+    <ClCompile Include="external\vst3sdk\base\source\updatehandler.cpp" />
+    <ClCompile Include="external\vst3sdk\base\thread\source\fcondition.cpp" />
+    <ClCompile Include="external\vst3sdk\base\thread\source\flock.cpp" />
+    <ClCompile Include="external\vst3sdk\pluginterfaces\base\conststringtable.cpp" />
+    <ClCompile Include="external\vst3sdk\pluginterfaces\base\coreiids.cpp" />
+    <ClCompile Include="external\vst3sdk\pluginterfaces\base\funknown.cpp" />
+    <ClCompile Include="external\vst3sdk\pluginterfaces\base\ustring.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\common\commoniids.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\common\pluginview.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\main\pluginfactory.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\main\moduleinit.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\utility\stringconvert.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vstaudioeffect.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vstbus.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vstcomponent.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vstcomponentbase.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vsteditcontroller.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vstinitiids.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\vst\vstparameters.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

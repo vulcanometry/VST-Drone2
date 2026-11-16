@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- VST3 instrument plug-in (Drone2.vst3), sharing the engine and the front panel with the app. -->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{C9B90209-BA11-4780-B2E4-C661ADBEAB48}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Drone2VST</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Build\Common.props" />
+  </ImportGroup>
+  <!-- Build straight into a VST3 bundle: bin\<platform>\<config>\Drone2.vst3\Contents\<arch>-win\Drone2.vst3 -->
+  <PropertyGroup>
+    <Vst3Arch Condition="'$(Platform)'=='x64'">x86_64-win</Vst3Arch>
+    <Vst3Arch Condition="'$(Platform)'=='Win32'">x86-win</Vst3Arch>
+    <OutDir>$(Drone2Root)bin\$(Platform)\$(Configuration)\Drone2.vst3\Contents\$(Vst3Arch)\</OutDir>
+    <TargetName>Drone2</TargetName>
+    <TargetExt>.vst3</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Drone2Root)Source\Plugin;$(Vst3SdkDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>gdiplus.lib;comdlg32.lib;shell32.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Plugin\*.cpp" />
+    <ClCompile Include="external\vst3sdk\public.sdk\source\main\dllmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Plugin\*.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Drone2Core.vcxproj">
+      <Project>{8D19558A-5840-4DAA-95CA-808D56EFC2E7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="VST3SDK.vcxproj">
+      <Project>{FC1A6FFB-B0EE-40B3-9F1C-CC6256F7EC9D}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
